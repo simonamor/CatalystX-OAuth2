@@ -85,6 +85,7 @@ sub extend_permissions {
     redirect_uri  => $callback_uri
   };
   $query->{state} = $auth_info->{state} if exists $auth_info->{state};
+  $query->{scope} = $auth_info->{scope} if exists $auth_info->{scope};
   $uri->query_form($query);
   return $uri;
 }
