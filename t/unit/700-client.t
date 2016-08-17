@@ -95,6 +95,7 @@ my $j = JSON::Any->new;
     }
   );
   $ua->mock( get => sub {$res} );
+  $ua->mock( post => sub {$res} );
   my $uri = URI->new('/');
   $uri->query_form( { code => 'foocode' } );
   my $c    = $mock->( GET $uri );

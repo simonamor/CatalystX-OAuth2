@@ -101,9 +101,9 @@ sub request_access_token {
     code         => $code,
     grant_type   => 'authorization_code'
   };
-  $query->{state} = $auth_info->{state} if exists $auth_info->{state};
-  $uri->query_form($query);
-  my $response = $self->ua->get($uri);
+  $query->{client_secret} = $self->client_secret if $self->client_secret;
+  # params are supposed to be via POST (RFC6749 3.2)
+  my $response = $self->ua->post($uri, $query);
   return unless $response->is_success;
   return $j->jsonToObj( $response->decoded_content );
 }

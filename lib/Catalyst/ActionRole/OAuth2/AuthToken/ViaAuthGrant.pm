@@ -44,7 +44,7 @@ sub build_oauth2_request {
 
   try {
     $req = CatalystX::OAuth2::Request::AuthToken->new(
-      %{ $c->req->query_parameters } );
+      %{ $c->req->query_parameters }, %{ $c->req->body_parameters } );
     $req->store($store);
     $req->refresh_token(exists $self->attributes->{Refresh});
   }
